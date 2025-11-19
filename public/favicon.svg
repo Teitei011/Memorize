@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle with sand gradient -->
+  <defs>
+    <linearGradient id="sandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e9a02f;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#c97339;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#da925e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="spiceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b9dff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a7df5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <circle cx="50" cy="50" r="48" fill="url(#sandGrad)"/>
+
+  <!-- Stylized sandworm/spice symbol -->
+  <!-- Central spice crystal shape -->
+  <path d="M 50 20 L 60 35 L 55 50 L 60 65 L 50 80 L 40 65 L 45 50 L 40 35 Z"
+        fill="url(#spiceGrad)"
+        stroke="#ffffff"
+        stroke-width="2"/>
+
+  <!-- Inner glow effect -->
+  <ellipse cx="50" cy="50" rx="8" ry="20" fill="#ffffff" opacity="0.3"/>
+
+  <!-- Memory symbol - stylized "M" in Fremen style -->
+  <path d="M 30 45 L 35 55 L 40 45 M 60 45 L 65 55 L 70 45"
+        stroke="#ffffff"
+        stroke-width="2.5"
+        fill="none"
+        stroke-linecap="round"/>
+
+  <!-- Decorative dots representing sand particles -->
+  <circle cx="25" cy="30" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="75" cy="30" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="25" cy="70" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="75" cy="70" r="1.5" fill="#ffffff" opacity="0.6"/>
+</svg>

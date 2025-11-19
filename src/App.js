@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Eye, EyeOff, Keyboard, Plus, Trash2, RotateCcw, Save, ArrowLeft, BookOpen } from 'lucide-react';
+import { Eye, EyeOff, Keyboard, Plus, Trash2, RotateCcw, Save, ArrowLeft, BookOpen, Play, Pause, RotateCw } from 'lucide-react';
 
 export default function App() {
   const [texts, setTexts] = useState([]);
@@ -11,9 +11,13 @@ export default function App() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [newTextTitle, setNewTextTitle] = useState('');
   const [newTextContent, setNewTextContent] = useState('');
+  const [newTextTimeLimit, setNewTextTimeLimit] = useState('');
   const [hidePercentage, setHidePercentage] = useState(10); // Percentage of words to hide per click
   const [wordInputs, setWordInputs] = useState({}); // Store user inputs for each hidden word
   const [showAnswers, setShowAnswers] = useState(false); // Toggle to show/hide answers
+  const [timeRemaining, setTimeRemaining] = useState(null); // Timer in seconds
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [timerExpired, setTimerExpired] = useState(false);
 
   // Load texts from localStorage on mount
   useEffect(() => {
@@ -30,32 +34,38 @@ export default function App() {
         {
           id: 1,
           title: "TOEFL Speaking - Task 1: Independent Speaking",
-          content: "There are several reasons why [your choice/opinion] is the best option. First, [reason 1 with specific example]. For instance, [personal example]. Second, [reason 2 with example]. This is because [explanation]. Finally, [reason 3 if applicable]. In conclusion, I believe [your opinion] is the most suitable choice for these reasons."
+          content: "There are several reasons why [your choice/opinion] is the best option. First, [reason 1 with specific example]. For instance, [personal example]. Second, [reason 2 with example]. This is because [explanation]. Finally, [reason 3 if applicable]. In conclusion, I believe [your opinion] is the most suitable choice for these reasons.",
+          timeLimit: 45 // seconds
         },
         {
           id: 2,
           title: "TOEFL Speaking - Task 2: Campus Situation",
-          content: "The reading passage describes [problem/situation]. According to the reading, [key details from reading]. The student in the conversation [agrees/disagrees] with this plan. The student has [positive/negative] feelings about it for [number] reasons. First, [student's reason 1 with details]. Second, [student's reason 2 with details]. Therefore, the student [supports/opposes] the plan because [summary of main reasons]."
+          content: "The reading passage describes [problem/situation]. According to the reading, [key details from reading]. The student in the conversation [agrees/disagrees] with this plan. The student has [positive/negative] feelings about it for [number] reasons. First, [student's reason 1 with details]. Second, [student's reason 2 with details]. Therefore, the student [supports/opposes] the plan because [summary of main reasons].",
+          timeLimit: 60 // seconds
         },
         {
           id: 3,
           title: "TOEFL Speaking - Task 3: Academic Course",
-          content: "The reading passage defines/explains [academic concept]. According to the reading, [definition/key points]. In the lecture, the professor gives [number] examples to demonstrate this concept. First, the professor discusses [first example with details]. Second, the professor explains [second example with details]. These examples clearly illustrate how [connection to concept]."
+          content: "The reading passage defines/explains [academic concept]. According to the reading, [definition/key points]. In the lecture, the professor gives [number] examples to demonstrate this concept. First, the professor discusses [first example with details]. Second, the professor explains [second example with details]. These examples clearly illustrate how [connection to concept].",
+          timeLimit: 60 // seconds
         },
         {
           id: 4,
           title: "TOEFL Speaking - Task 4: Academic Lecture",
-          content: "In this lecture, the professor discusses [main topic]. The professor explains that [main point 1] and [main point 2]. For example, the professor mentions [specific example 1]. Additionally, the professor describes [specific example 2]. The lecture focuses on [summary of main topic and key points]."
+          content: "In this lecture, the professor discusses [main topic]. The professor explains that [main point 1] and [main point 2]. For example, the professor mentions [specific example 1]. Additionally, the professor describes [specific example 2]. The lecture focuses on [summary of main topic and key points].",
+          timeLimit: 60 // seconds
         },
         {
           id: 5,
           title: "TOEFL Writing - Task 1: Integrated Writing",
-          content: "The reading passage discusses [main topic of reading] while the lecture presents [main idea of lecture that contradicts/supports the reading]. The professor challenges/supports the ideas in the reading by providing [number] specific points.\n\nFirst, the reading states that [reading point 1]. However, the professor argues that [lecture point 1 that contradicts/supports]. For example, [specific example from lecture].\n\nSecond, according to the reading [reading point 2], but the professor explains that [lecture point 2]. The professor points out that [specific detail from lecture].\n\nFinally, the reading claims [reading point 3], yet the lecture contradicts/supports this by stating [lecture point 3]. The professor demonstrates this by [specific example from lecture].\n\nIn conclusion, the lecture effectively [challenges/supports] the reading's claims through [number] specific points."
+          content: "The reading passage discusses [main topic of reading] while the lecture presents [main idea of lecture that contradicts/supports the reading]. The professor challenges/supports the ideas in the reading by providing [number] specific points.\n\nFirst, the reading states that [reading point 1]. However, the professor argues that [lecture point 1 that contradicts/supports]. For example, [specific example from lecture].\n\nSecond, according to the reading [reading point 2], but the professor explains that [lecture point 2]. The professor points out that [specific detail from lecture].\n\nFinally, the reading claims [reading point 3], yet the lecture contradicts/supports this by stating [lecture point 3]. The professor demonstrates this by [specific example from lecture].\n\nIn conclusion, the lecture effectively [challenges/supports] the reading's claims through [number] specific points.",
+          timeLimit: 1200 // 20 minutes in seconds
         },
         {
           id: 6,
           title: "TOEFL Writing - Task 2: Independent Writing",
-          content: "In today's world, [general statement about the topic]. While some people believe [opposing viewpoint], I strongly believe [your thesis statement] for several compelling reasons.\n\nFirst, [first main reason]. For example, [specific example with details]. This clearly shows that [explanation of how example supports your point]. Many [people/situations] demonstrate [relevance of your example].\n\nSecond, [second main reason]. A good example of this is [specific example]. This example illustrates that [how the example supports your argument]. Furthermore, [additional explanation].\n\nAdditionally, [third reason if you choose to include one]. [Example and explanation].\n\nIn conclusion, while [acknowledge opposing view briefly], I maintain that [restatement of your position]. [Final thought about future implications or broader context]."
+          content: "In today's world, [general statement about the topic]. While some people believe [opposing viewpoint], I strongly believe [your thesis statement] for several compelling reasons.\n\nFirst, [first main reason]. For example, [specific example with details]. This clearly shows that [explanation of how example supports your point]. Many [people/situations] demonstrate [relevance of your example].\n\nSecond, [second main reason]. A good example of this is [specific example]. This example illustrates that [how the example supports your argument]. Furthermore, [additional explanation].\n\nAdditionally, [third reason if you choose to include one]. [Example and explanation].\n\nIn conclusion, while [acknowledge opposing view briefly], I maintain that [restatement of your position]. [Final thought about future implications or broader context].",
+          timeLimit: 1800 // 30 minutes in seconds
         }
       ];
       setTexts(defaultTexts);
@@ -72,6 +82,39 @@ export default function App() {
   }, [texts]);
 
   const currentText = texts.find(t => t.id === currentTextId);
+
+  // Timer countdown effect
+  useEffect(() => {
+    if (isTimerRunning && timeRemaining !== null && timeRemaining > 0) {
+      const interval = setInterval(() => {
+        setTimeRemaining(prev => {
+          if (prev <= 1) {
+            setIsTimerRunning(false);
+            setTimerExpired(true);
+            // Play audio alert
+            const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUKfj8LZjHAU5k9jyz3wvBSl+zPLaizsKGGS35+yrWBgNSpzg8sFuIgYtg9Hy04s4CBlot+3nn04MDFCn5PC2YxwGOJPY8tB9MQUqgM/y2Ys5CRdluubsrVoaDU2c4/PCZSEG');
+            audio.play().catch(() => {}); // Ignore errors if audio fails
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [isTimerRunning, timeRemaining]);
+
+  // Initialize timer when text changes
+  useEffect(() => {
+    if (currentText && currentText.timeLimit) {
+      setTimeRemaining(currentText.timeLimit);
+      setIsTimerRunning(false);
+      setTimerExpired(false);
+    } else {
+      setTimeRemaining(null);
+      setIsTimerRunning(false);
+      setTimerExpired(false);
+    }
+  }, [currentTextId, currentText]);
   const words = currentText ? currentText.content.split(/(\s+)/) : [];
   const wordIndices = words.map((word, idx) => ({ word, idx })).filter(({ word }) => word.trim().length > 0);
 
@@ -82,10 +125,17 @@ export default function App() {
         title: newTextTitle.trim(),
         content: newTextContent.trim()
       };
+
+      // Add time limit if provided
+      if (newTextTimeLimit && parseInt(newTextTimeLimit) > 0) {
+        newText.timeLimit = parseInt(newTextTimeLimit);
+      }
+
       setTexts([...texts, newText]);
       setCurrentTextId(newText.id);
       setNewTextTitle('');
       setNewTextContent('');
+      setNewTextTimeLimit('');
       setShowAddForm(false);
       setHiddenIndices(new Set());
     }
@@ -131,6 +181,37 @@ export default function App() {
     setUserInput('');
     setWordInputs({});
     setShowAnswers(false);
+    if (currentText && currentText.timeLimit) {
+      setTimeRemaining(currentText.timeLimit);
+      setIsTimerRunning(false);
+      setTimerExpired(false);
+    }
+  };
+
+  const formatTime = (seconds) => {
+    if (seconds === null) return '--:--';
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const startTimer = () => {
+    if (timeRemaining !== null && timeRemaining > 0) {
+      setIsTimerRunning(true);
+      setTimerExpired(false);
+    }
+  };
+
+  const pauseTimer = () => {
+    setIsTimerRunning(false);
+  };
+
+  const resetTimer = () => {
+    if (currentText && currentText.timeLimit) {
+      setTimeRemaining(currentText.timeLimit);
+      setIsTimerRunning(false);
+      setTimerExpired(false);
+    }
   };
 
   const handleWordInputChange = (idx, value) => {
@@ -192,6 +273,22 @@ export default function App() {
                     placeholder="Paste or type the text you want to memorize..."
                   />
                 </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Time Limit (optional, in seconds)
+                  </label>
+                  <input
+                    type="number"
+                    value={newTextTimeLimit}
+                    onChange={(e) => setNewTextTimeLimit(e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    placeholder="e.g., 60 for 1 minute, 1800 for 30 minutes"
+                    min="1"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Enter time in seconds (e.g., 60 = 1 minute, 300 = 5 minutes). Leave empty for no timer.
+                  </p>
+                </div>
                 <div className="flex gap-3">
                   <button
                     onClick={addText}
@@ -205,6 +302,7 @@ export default function App() {
                       setShowAddForm(false);
                       setNewTextTitle('');
                       setNewTextContent('');
+                      setNewTextTimeLimit('');
                     }}
                     className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
                   >
@@ -307,6 +405,69 @@ export default function App() {
           </h1>
           <div className="w-32"></div> {/* Spacer for centering */}
         </div>
+
+        {/* Timer Display */}
+        {currentText && currentText.timeLimit && (
+          <div className="mb-6 bg-white rounded-lg shadow-lg p-6">
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <h2 className="text-sm font-medium text-gray-600 mb-1">Time Limit</h2>
+                <p className="text-xs text-gray-500">
+                  {currentText.timeLimit >= 60
+                    ? `${Math.floor(currentText.timeLimit / 60)} minute${Math.floor(currentText.timeLimit / 60) > 1 ? 's' : ''}`
+                    : `${currentText.timeLimit} seconds`}
+                </p>
+              </div>
+
+              <div className="flex-1 text-center">
+                <div className={`text-5xl font-bold ${
+                  timerExpired
+                    ? 'text-red-600'
+                    : timeRemaining <= 10 && timeRemaining > 0
+                    ? 'text-orange-600'
+                    : 'text-indigo-900'
+                }`}>
+                  {formatTime(timeRemaining)}
+                </div>
+                {timerExpired && (
+                  <p className="text-red-600 font-medium mt-2 text-sm">Time's up!</p>
+                )}
+              </div>
+
+              <div className="flex-1 flex justify-end gap-2">
+                {!isTimerRunning ? (
+                  <button
+                    onClick={startTimer}
+                    disabled={timeRemaining === 0}
+                    className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
+                      timeRemaining === 0
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-green-600 text-white hover:bg-green-700 shadow-md'
+                    }`}
+                  >
+                    <Play size={18} />
+                    Start
+                  </button>
+                ) : (
+                  <button
+                    onClick={pauseTimer}
+                    className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all font-medium flex items-center gap-2 shadow-md"
+                  >
+                    <Pause size={18} />
+                    Pause
+                  </button>
+                )}
+                <button
+                  onClick={resetTimer}
+                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all font-medium flex items-center gap-2 shadow-md"
+                >
+                  <RotateCw size={18} />
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="space-y-6">
           {/* Settings Panel */}

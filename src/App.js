@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Eye, EyeOff, Keyboard, Plus, Trash2, RotateCcw, Save, ArrowLeft, BookOpen, Play, Pause, RotateCw } from 'lucide-react';
+import { Eye, EyeOff, Keyboard, Plus, Trash2, RotateCcw, Save, ArrowLeft, BookOpen, Play, Pause, RotateCw, Edit } from 'lucide-react';
 
 export default function App() {
   const [texts, setTexts] = useState([]);
@@ -9,6 +9,7 @@ export default function App() {
   const [hiddenIndices, setHiddenIndices] = useState(new Set());
   const [userInput, setUserInput] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);
+  const [editingTextId, setEditingTextId] = useState(null);
   const [newTextTitle, setNewTextTitle] = useState('');
   const [newTextContent, setNewTextContent] = useState('');
   const [newTextTimeLimit, setNewTextTimeLimit] = useState('');
@@ -141,6 +142,54 @@ export default function App() {
     }
   };
 
+  const startEdit = (text) => {
+    setEditingTextId(text.id);
+    setNewTextTitle(text.title);
+    setNewTextContent(text.content);
+    setNewTextTimeLimit(text.timeLimit || '');
+    setShowAddForm(true);
+  };
+
+  const updateText = () => {
+    if (newTextTitle.trim() && newTextContent.trim() && editingTextId) {
+      const updatedTexts = texts.map(text => {
+        if (text.id === editingTextId) {
+          const updatedText = {
+            ...text,
+            title: newTextTitle.trim(),
+            content: newTextContent.trim()
+          };
+
+          // Update or remove time limit
+          if (newTextTimeLimit && parseInt(newTextTimeLimit) > 0) {
+            updatedText.timeLimit = parseInt(newTextTimeLimit);
+          } else {
+            delete updatedText.timeLimit;
+          }
+
+          return updatedText;
+        }
+        return text;
+      });
+
+      setTexts(updatedTexts);
+      setNewTextTitle('');
+      setNewTextContent('');
+      setNewTextTimeLimit('');
+      setShowAddForm(false);
+      setEditingTextId(null);
+      setHiddenIndices(new Set());
+    }
+  };
+
+  const cancelForm = () => {
+    setShowAddForm(false);
+    setEditingTextId(null);
+    setNewTextTitle('');
+    setNewTextContent('');
+    setNewTextTimeLimit('');
+  };
+
   const deleteText = (id) => {
     const newTexts = texts.filter(t => t.id !== id);
     setTexts(newTexts);
@@ -248,7 +297,9 @@ export default function App() {
 
           {showAddForm ? (
             <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">Add New Text</h2>
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                {editingTextId ? 'Edit Text' : 'Add New Text'}
+              </h2>
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -291,19 +342,14 @@ export default function App() {
                 </div>
                 <div className="flex gap-3">
                   <button
-                    onClick={addText}
+                    onClick={editingTextId ? updateText : addText}
                     className="flex-1 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium flex items-center justify-center gap-2"
                   >
                     <Save size={20} />
-                    Save Text
+                    {editingTextId ? 'Update Text' : 'Save Text'}
                   </button>
                   <button
-                    onClick={() => {
-                      setShowAddForm(false);
-                      setNewTextTitle('');
-                      setNewTextContent('');
-                      setNewTextTimeLimit('');
-                    }}
+                    onClick={cancelForm}
                     className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
                   >
                     Cancel
@@ -334,12 +380,22 @@ export default function App() {
                   <h3 className="text-xl font-semibold text-gray-800 flex-1">
                     {text.title}
                   </h3>
-                  <button
-                    onClick={() => deleteText(text.id)}
-                    className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                  >
-                    <Trash2 size={18} />
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => startEdit(text)}
+                      className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                      title="Edit text"
+                    >
+                      <Edit size={18} />
+                    </button>
+                    <button
+                      onClick={() => deleteText(text.id)}
+                      className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                      title="Delete text"
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                  </div>
                 </div>
                 <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                   {text.content}

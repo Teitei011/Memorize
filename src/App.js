@@ -288,69 +288,69 @@ export default function App() {
   // Library Page
   if (currentPage === 'library') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 p-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-indigo-900 mb-2 text-center">
-            Text Memorization Tool
+          <h1 className="text-4xl font-bold font-dune text-orange-600 mb-2 text-center dune-glow tracking-wider">
+            MEMORIZATION LIBRARY
           </h1>
-          <p className="text-center text-gray-600 mb-8">Manage your texts and start practicing</p>
+          <p className="text-center text-amber-700 mb-8 font-fremen">Master your speaking and writing templates</p>
 
           {showAddForm ? (
-            <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                {editingTextId ? 'Edit Text' : 'Add New Text'}
+            <div className="bg-white rounded-lg shadow-2xl border-2 border-orange-300 p-6 mb-6">
+              <h2 className="text-2xl font-bold font-dune text-orange-700 mb-4">
+                {editingTextId ? 'Edit Template' : 'New Template'}
               </h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2 font-fremen tracking-wide">
                     Title
                   </label>
                   <input
                     type="text"
                     value={newTextTitle}
                     onChange={(e) => setNewTextTitle(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    placeholder="e.g., Spanish Vocabulary, Poem, Speech..."
+                    className="w-full px-4 py-2 bg-amber-50 border-2 border-amber-300 text-gray-800 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Template name..."
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2 font-fremen tracking-wide">
                     Content
                   </label>
                   <textarea
                     value={newTextContent}
                     onChange={(e) => setNewTextContent(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent min-h-48"
-                    placeholder="Paste or type the text you want to memorize..."
+                    className="w-full px-4 py-2 bg-amber-50 border-2 border-amber-300 text-gray-800 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-48"
+                    placeholder="Enter text to memorize..."
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2 font-fremen tracking-wide">
                     Time Limit (optional, in seconds)
                   </label>
                   <input
                     type="number"
                     value={newTextTimeLimit}
                     onChange={(e) => setNewTextTimeLimit(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    placeholder="e.g., 60 for 1 minute, 1800 for 30 minutes"
+                    className="w-full px-4 py-2 bg-amber-50 border-2 border-amber-300 text-gray-800 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Time in seconds"
                     min="1"
                   />
-                  <p className="text-xs text-gray-500 mt-1">
-                    Enter time in seconds (e.g., 60 = 1 minute, 300 = 5 minutes). Leave empty for no timer.
+                  <p className="text-xs text-gray-600 mt-1">
+                    Enter time in seconds. Leave empty for unlimited practice.
                   </p>
                 </div>
                 <div className="flex gap-3">
                   <button
                     onClick={editingTextId ? updateText : addText}
-                    className="flex-1 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium flex items-center justify-center gap-2"
+                    className="flex-1 px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-lg hover:from-orange-600 hover:to-amber-600 transition-all font-bold font-fremen flex items-center justify-center gap-2 shadow-lg dune-glow"
                   >
                     <Save size={20} />
-                    {editingTextId ? 'Update Text' : 'Save Text'}
+                    {editingTextId ? 'Update Template' : 'Save Template'}
                   </button>
                   <button
                     onClick={cancelForm}
-                    className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+                    className="px-6 py-3 bg-gray-200 text-gray-700 border-2 border-gray-300 rounded-lg hover:bg-gray-300 transition-colors font-medium font-fremen"
                   >
                     Cancel
                   </button>
@@ -361,10 +361,10 @@ export default function App() {
             <div className="mb-6 flex justify-center">
               <button
                 onClick={() => setShowAddForm(true)}
-                className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium flex items-center gap-2 shadow-lg"
+                className="px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-lg hover:from-orange-600 hover:to-amber-600 transition-all font-bold font-fremen flex items-center gap-2 shadow-lg dune-glow"
               >
                 <Plus size={20} />
-                Add New Text
+                New Template
               </button>
             </div>
           )}
@@ -374,30 +374,30 @@ export default function App() {
             {texts.map(text => (
               <div
                 key={text.id}
-                className="bg-white rounded-lg shadow-lg p-5 hover:shadow-xl transition-shadow"
+                className="bg-white border-2 border-orange-200 rounded-lg shadow-lg p-5 hover:shadow-2xl hover:border-orange-400 transition-all"
               >
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-semibold text-gray-800 flex-1">
+                  <h3 className="text-xl font-bold font-fremen text-orange-700 flex-1">
                     {text.title}
                   </h3>
                   <div className="flex gap-2">
                     <button
                       onClick={() => startEdit(text)}
-                      className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                      title="Edit text"
+                      className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors border border-blue-300"
+                      title="Edit template"
                     >
                       <Edit size={18} />
                     </button>
                     <button
                       onClick={() => deleteText(text.id)}
-                      className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                      title="Delete text"
+                      className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors border border-red-300"
+                      title="Delete template"
                     >
                       <Trash2 size={18} />
                     </button>
                   </div>
                 </div>
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                <p className="text-gray-700 text-sm mb-4 line-clamp-3">
                   {text.content}
                 </p>
                 <div className="flex gap-2">
@@ -409,10 +409,10 @@ export default function App() {
                       setWordInputs({});
                       setCurrentPage('practice');
                     }}
-                    className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center justify-center gap-2"
+                    className="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all font-bold font-fremen flex items-center justify-center gap-2 dune-glow-blue"
                   >
                     <BookOpen size={18} />
-                    Practice
+                    Start Practice
                   </button>
                 </div>
               </div>
@@ -420,10 +420,10 @@ export default function App() {
           </div>
 
           {texts.length === 0 && !showAddForm && (
-            <div className="bg-white rounded-lg shadow-lg p-12 text-center">
-              <BookOpen size={48} className="mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-500 text-lg">
-                No texts yet. Click "Add New Text" to get started!
+            <div className="bg-white border-2 border-orange-200 rounded-lg shadow-lg p-12 text-center">
+              <BookOpen size={48} className="mx-auto text-orange-500 mb-4" />
+              <p className="text-gray-700 text-lg font-fremen">
+                No templates yet. Click "New Template" to begin.
               </p>
             </div>
           )}
@@ -440,7 +440,7 @@ export default function App() {
 
   // Practice Page
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 p-4">
       <div className="max-w-5xl mx-auto">
         {/* Header with Back Button */}
         <div className="mb-6 flex items-center gap-4">
@@ -451,24 +451,24 @@ export default function App() {
               setUserInput('');
               setWordInputs({});
             }}
-            className="px-4 py-2 bg-white text-gray-700 rounded-lg hover:bg-gray-100 transition-colors font-medium flex items-center gap-2 shadow-md"
+            className="px-4 py-2 bg-white text-gray-700 border-2 border-orange-300 rounded-lg hover:bg-orange-50 transition-colors font-bold font-fremen flex items-center gap-2 shadow-md"
           >
             <ArrowLeft size={20} />
             Back to Library
           </button>
-          <h1 className="text-3xl font-bold text-indigo-900 flex-1 text-center">
-            {currentText?.title || 'Practice'}
+          <h1 className="text-3xl font-bold font-dune text-orange-600 flex-1 text-center dune-glow tracking-wide">
+            {currentText?.title || 'Practice Mode'}
           </h1>
-          <div className="w-32"></div> {/* Spacer for centering */}
+          <div className="w-48"></div> {/* Spacer for centering */}
         </div>
 
         {/* Timer Display */}
         {currentText && currentText.timeLimit && (
-          <div className="mb-6 bg-white rounded-lg shadow-lg p-6">
+          <div className="mb-6 bg-white border-2 border-orange-300 rounded-lg shadow-2xl p-6">
             <div className="flex items-center justify-between">
               <div className="flex-1">
-                <h2 className="text-sm font-medium text-gray-600 mb-1">Time Limit</h2>
-                <p className="text-xs text-gray-500">
+                <h2 className="text-sm font-bold font-fremen text-gray-700 mb-1 tracking-wider">TIMER</h2>
+                <p className="text-xs text-gray-600">
                   {currentText.timeLimit >= 60
                     ? `${Math.floor(currentText.timeLimit / 60)} minute${Math.floor(currentText.timeLimit / 60) > 1 ? 's' : ''}`
                     : `${currentText.timeLimit} seconds`}
@@ -476,17 +476,17 @@ export default function App() {
               </div>
 
               <div className="flex-1 text-center">
-                <div className={`text-5xl font-bold ${
+                <div className={`text-5xl font-bold font-dune ${
                   timerExpired
-                    ? 'text-red-600'
+                    ? 'text-red-600 dune-glow'
                     : timeRemaining <= 10 && timeRemaining > 0
-                    ? 'text-orange-600'
-                    : 'text-indigo-900'
+                    ? 'text-orange-500'
+                    : 'text-blue-600 dune-glow-blue'
                 }`}>
                   {formatTime(timeRemaining)}
                 </div>
                 {timerExpired && (
-                  <p className="text-red-600 font-medium mt-2 text-sm">Time's up!</p>
+                  <p className="text-red-600 font-bold font-fremen mt-2 text-sm tracking-wide">Time's Up!</p>
                 )}
               </div>
 
@@ -495,10 +495,10 @@ export default function App() {
                   <button
                     onClick={startTimer}
                     disabled={timeRemaining === 0}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
+                    className={`px-4 py-2 rounded-lg font-bold font-fremen transition-all flex items-center gap-2 ${
                       timeRemaining === 0
-                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                        : 'bg-green-600 text-white hover:bg-green-700 shadow-md'
+                        ? 'bg-gray-200 text-gray-500 cursor-not-allowed border-2 border-gray-300'
+                        : 'bg-gradient-to-r from-green-500 to-green-600 text-white hover:from-green-600 hover:to-green-700 shadow-md border-2 border-green-400'
                     }`}
                   >
                     <Play size={18} />
@@ -507,7 +507,7 @@ export default function App() {
                 ) : (
                   <button
                     onClick={pauseTimer}
-                    className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all font-medium flex items-center gap-2 shadow-md"
+                    className="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-lg hover:from-orange-600 hover:to-amber-600 transition-all font-bold font-fremen flex items-center gap-2 shadow-md border-2 border-orange-400"
                   >
                     <Pause size={18} />
                     Pause
@@ -515,7 +515,7 @@ export default function App() {
                 )}
                 <button
                   onClick={resetTimer}
-                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all font-medium flex items-center gap-2 shadow-md"
+                  className="px-4 py-2 bg-gray-200 text-gray-700 border-2 border-gray-300 rounded-lg hover:bg-gray-300 transition-all font-bold font-fremen flex items-center gap-2 shadow-md"
                 >
                   <RotateCw size={18} />
                   Reset
@@ -527,43 +527,43 @@ export default function App() {
 
         <div className="space-y-6">
           {/* Settings Panel */}
-          <div className="bg-white rounded-lg shadow-lg p-4">
+          <div className="bg-white border-2 border-orange-200 rounded-lg shadow-lg p-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Mode Selector */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Study Mode
+                <label className="block text-sm font-bold font-fremen text-gray-700 mb-2 tracking-wider">
+                  Practice Mode
                 </label>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setMode('read')}
-                    className={`flex-1 py-2 px-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
+                    className={`flex-1 py-2 px-3 rounded-lg font-bold font-fremen transition-all flex items-center justify-center gap-2 ${
                       mode === 'read'
-                        ? 'bg-indigo-600 text-white shadow-md'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md dune-glow-blue border-2 border-blue-400'
+                        : 'bg-gray-100 text-gray-600 border-2 border-gray-300 hover:bg-gray-200'
                     }`}
                   >
                     <Eye size={18} />
-                    Read
+                    Fill Blanks
                   </button>
                   <button
                     onClick={() => setMode('type')}
-                    className={`flex-1 py-2 px-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
+                    className={`flex-1 py-2 px-3 rounded-lg font-bold font-fremen transition-all flex items-center justify-center gap-2 ${
                       mode === 'type'
-                        ? 'bg-indigo-600 text-white shadow-md'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md dune-glow-blue border-2 border-blue-400'
+                        : 'bg-gray-100 text-gray-600 border-2 border-gray-300 hover:bg-gray-200'
                     }`}
                   >
                     <Keyboard size={18} />
-                    Type
+                    Type Full Text
                   </button>
                 </div>
               </div>
 
               {/* Percentage Selector */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Hide {hidePercentage}% per click
+                <label className="block text-sm font-bold font-fremen text-gray-700 mb-2 tracking-wider">
+                  Hide Rate: {hidePercentage}%
                 </label>
                 <div className="flex items-center gap-3">
                   <input
@@ -572,7 +572,7 @@ export default function App() {
                     max="50"
                     value={hidePercentage}
                     onChange={(e) => setHidePercentage(parseInt(e.target.value))}
-                    className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                    className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
                   />
                   <input
                     type="number"
@@ -580,27 +580,27 @@ export default function App() {
                     max="50"
                     value={hidePercentage}
                     onChange={(e) => setHidePercentage(Math.min(50, Math.max(1, parseInt(e.target.value) || 1)))}
-                    className="w-16 px-2 py-1 border border-gray-300 rounded text-center focus:ring-2 focus:ring-indigo-500"
+                    className="w-16 px-2 py-1 bg-amber-50 border-2 border-amber-300 text-gray-800 rounded text-center focus:ring-2 focus:ring-blue-500"
                   />
-                  <span className="text-gray-600 text-sm">%</span>
+                  <span className="text-gray-600 text-sm font-bold">%</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Text Display Area */}
-          <div className="bg-white rounded-lg shadow-lg p-8">
+          <div className="bg-white border-2 border-orange-300 rounded-lg shadow-2xl p-8">
             <div className="mb-4 flex items-center justify-between">
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-700 font-fremen">
                 Progress: {hiddenIndices.size} / {wordIndices.length} words hidden
               </div>
-              <div className="text-sm font-medium text-indigo-600">
+              <div className="text-sm font-bold text-blue-600 font-dune tracking-wider">
                 {wordIndices.length > 0 ? Math.round((hiddenIndices.size / wordIndices.length) * 100) : 0}% Complete
               </div>
             </div>
 
             {mode === 'read' ? (
-              <div className="text-lg leading-relaxed text-gray-800 mb-6 p-4 bg-gray-50 rounded-lg min-h-48">
+              <div className="text-lg leading-relaxed text-gray-800 mb-6 p-4 bg-amber-50 border border-orange-200 rounded-lg min-h-48">
                 {words.map((word, idx) => {
                   const isWhitespace = word.trim().length === 0;
                   const isHidden = hiddenIndices.has(idx);
@@ -610,17 +610,17 @@ export default function App() {
                   }
 
                   if (isHidden) {
-                    // If showing answers, display the word with yellow highlight
+                    // If showing answers, display the word with orange highlight
                     if (showAnswers) {
                       return (
-                        <span key={idx} className="bg-yellow-200 px-1 rounded font-semibold">
+                        <span key={idx} className="bg-orange-400 text-white px-1 rounded font-bold">
                           {word}
                         </span>
                       );
                     }
 
                     const isCorrect = checkWordCorrect(idx, word);
-                    let borderColor = 'border-gray-300';
+                    let borderColor = 'border-orange-300';
                     let bgColor = 'bg-white';
 
                     if (isCorrect === true) {
@@ -637,7 +637,7 @@ export default function App() {
                         type="text"
                         value={wordInputs[idx] || ''}
                         onChange={(e) => handleWordInputChange(idx, e.target.value)}
-                        className={`inline-block border-2 ${borderColor} ${bgColor} rounded px-1 mx-0.5 text-center focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+                        className={`inline-block border-2 ${borderColor} ${bgColor} text-gray-800 rounded px-1 mx-0.5 text-center focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         style={{ width: `${Math.max(word.length * 0.8, 3)}em` }}
                         placeholder="___"
                       />
@@ -649,7 +649,7 @@ export default function App() {
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="text-lg leading-relaxed text-gray-800 p-4 bg-gray-50 rounded-lg min-h-32">
+                <div className="text-lg leading-relaxed text-gray-800 p-4 bg-amber-50 border border-orange-200 rounded-lg min-h-32">
                   {words.map((word, idx) => {
                     const isWhitespace = word.trim().length === 0;
                     const isHidden = hiddenIndices.has(idx);
@@ -662,7 +662,7 @@ export default function App() {
                       return (
                         <span
                           key={idx}
-                          className="inline-block bg-gray-300 rounded px-1 mx-0.5"
+                          className="inline-block bg-orange-300 rounded px-1 mx-0.5"
                           style={{ width: `${word.length * 0.6}em` }}
                         >
                           &nbsp;
@@ -675,21 +675,21 @@ export default function App() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Type the full text:
+                  <label className="block text-sm font-bold font-fremen text-gray-700 mb-2 tracking-wider">
+                    Your Answer:
                   </label>
                   <textarea
                     value={userInput}
                     onChange={(e) => setUserInput(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent min-h-32"
+                    className="w-full px-4 py-3 bg-white border-2 border-orange-300 text-gray-800 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-32"
                     placeholder="Type the complete text here..."
                   />
                   {userInput && (
                     <div className="mt-2">
                       {checkTypedText() ? (
-                        <p className="text-green-600 font-medium">✓ Perfect match!</p>
+                        <p className="text-green-600 font-bold font-fremen">✓ Perfect! Text matches correctly</p>
                       ) : (
-                        <p className="text-gray-600 text-sm">Keep typing...</p>
+                        <p className="text-gray-600 text-sm font-fremen">Keep typing...</p>
                       )}
                     </div>
                   )}
@@ -702,21 +702,21 @@ export default function App() {
               <button
                 onClick={hideRandomWord}
                 disabled={allWordsHidden}
-                className={`flex-1 py-3 px-6 rounded-lg font-medium transition-all ${
+                className={`flex-1 py-3 px-6 rounded-lg font-bold font-fremen transition-all ${
                   allWordsHidden
-                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    : 'bg-green-600 text-white hover:bg-green-700 shadow-md hover:shadow-lg'
+                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed border-2 border-gray-300'
+                    : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 shadow-md hover:shadow-2xl dune-glow-blue border-2 border-blue-400'
                 }`}
               >
-                {allWordsHidden ? 'All Words Hidden!' : `I Know This - Hide ${hidePercentage}%`}
+                {allWordsHidden ? 'All Words Hidden!' : `Hide ${hidePercentage}% More Words`}
               </button>
               {mode === 'read' && hiddenIndices.size > 0 && (
                 <button
                   onClick={() => setShowAnswers(!showAnswers)}
-                  className={`px-6 py-3 rounded-lg transition-all font-medium shadow-md hover:shadow-lg flex items-center gap-2 ${
+                  className={`px-6 py-3 rounded-lg transition-all font-bold font-fremen shadow-md hover:shadow-lg flex items-center gap-2 border-2 ${
                     showAnswers
-                      ? 'bg-yellow-600 text-white hover:bg-yellow-700'
-                      : 'bg-blue-600 text-white hover:bg-blue-700'
+                      ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white hover:from-orange-600 hover:to-amber-600 border-orange-400'
+                      : 'bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 border-purple-400'
                   }`}
                 >
                   {showAnswers ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -725,7 +725,7 @@ export default function App() {
               )}
               <button
                 onClick={reset}
-                className="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-all font-medium shadow-md hover:shadow-lg flex items-center gap-2"
+                className="px-6 py-3 bg-gray-200 text-gray-700 border-2 border-gray-300 rounded-lg hover:bg-gray-300 transition-all font-bold font-fremen shadow-md hover:shadow-lg flex items-center gap-2"
               >
                 <RotateCcw size={20} />
                 Reset
@@ -733,9 +733,9 @@ export default function App() {
             </div>
 
             {allWordsHidden && (
-              <div className="mt-6 p-4 bg-green-50 border-2 border-green-500 rounded-lg">
-                <p className="text-green-800 font-medium text-center">
-                  🎉 Great job! All words are hidden. Click Reset to practice again!
+              <div className="mt-6 p-4 bg-gradient-to-r from-green-100 to-blue-100 border-2 border-green-400 rounded-lg">
+                <p className="text-green-700 font-bold font-dune text-center tracking-wider">
+                  🎉 Great job! All words are hidden. Reset to start over.
                 </p>
               </div>
             )}

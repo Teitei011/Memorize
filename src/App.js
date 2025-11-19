@@ -101,7 +101,13 @@ export default function App() {
   };
 
   const hideRandomWord = () => {
-    const visibleWordIndices = wordIndices.filter(({ idx }) => !hiddenIndices.has(idx));
+    // Filter out words that are already hidden AND words that contain brackets []
+    const visibleWordIndices = wordIndices.filter(({ idx, word }) => {
+      if (hiddenIndices.has(idx)) return false;
+      // Don't hide words that contain brackets
+      if (word.includes('[') || word.includes(']')) return false;
+      return true;
+    });
 
     if (visibleWordIndices.length === 0) return;
 

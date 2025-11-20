@@ -297,42 +297,42 @@ export default function App() {
       <div className="min-h-screen bg-gradient-to-br from-dune-sand-100 via-dune-bronze-50 to-dune-desert-100 p-2 sm:p-4">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-dune text-orange-600 mb-2 text-center dune-glow tracking-wider">
-            MEMORIZATION LIBRARY
+            MENTAT TRAINING ARCHIVES
           </h1>
-          <p className="text-center text-amber-700 mb-4 sm:mb-8 font-fremen text-sm sm:text-base">Master your speaking and writing templates</p>
+          <p className="text-center text-amber-700 mb-4 sm:mb-8 font-fremen text-sm sm:text-base">It is by will alone I set my mind in motion - Train like a human computer</p>
 
           {showAddForm ? (
             <div className="bg-white rounded-lg shadow-2xl border-2 border-orange-300 p-4 sm:p-6 mb-4 sm:mb-6">
               <h2 className="text-xl sm:text-2xl font-bold font-dune text-orange-700 mb-4">
-                {editingTextId ? 'Edit Template' : 'New Template'}
+                {editingTextId ? 'Edit Training Module' : 'New Training Module'}
               </h2>
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2 font-fremen tracking-wide">
-                    Title
+                    Module Title
                   </label>
                   <input
                     type="text"
                     value={newTextTitle}
                     onChange={(e) => setNewTextTitle(e.target.value)}
                     className="w-full px-4 py-2 bg-amber-50 border-2 border-amber-300 text-gray-800 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Template name..."
+                    placeholder="Training module name..."
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2 font-fremen tracking-wide">
-                    Content
+                    Training Content
                   </label>
                   <textarea
                     value={newTextContent}
                     onChange={(e) => setNewTextContent(e.target.value)}
                     className="w-full px-4 py-2 bg-amber-50 border-2 border-amber-300 text-gray-800 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-48"
-                    placeholder="Enter text to memorize..."
+                    placeholder="Enter data to commit to Mentat memory..."
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2 font-fremen tracking-wide">
-                    Time Limit (optional, in seconds)
+                    Computation Time Limit (optional, in seconds)
                   </label>
                   <input
                     type="number"
@@ -343,7 +343,7 @@ export default function App() {
                     min="1"
                   />
                   <p className="text-xs text-gray-600 mt-1">
-                    Enter time in seconds. Leave empty for unlimited practice.
+                    Set your Mentat processing time. Leave empty for unlimited training.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
@@ -370,7 +370,7 @@ export default function App() {
                 className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-lg hover:from-orange-600 hover:to-amber-600 transition-all font-bold font-fremen flex items-center gap-2 shadow-lg dune-glow text-sm sm:text-base"
               >
                 <Plus size={18} className="sm:w-5 sm:h-5" />
-                New Template
+                New Training Module
               </button>
             </div>
           )}
@@ -390,14 +390,14 @@ export default function App() {
                     <button
                       onClick={() => startEdit(text)}
                       className="p-1.5 sm:p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors border border-blue-300"
-                      title="Edit template"
+                      title="Edit module"
                     >
                       <Edit size={16} className="sm:w-[18px] sm:h-[18px]" />
                     </button>
                     <button
                       onClick={() => deleteText(text.id)}
                       className="p-1.5 sm:p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors border border-red-300"
-                      title="Delete template"
+                      title="Delete module"
                     >
                       <Trash2 size={16} className="sm:w-[18px] sm:h-[18px]" />
                     </button>
@@ -418,8 +418,8 @@ export default function App() {
                     className="flex-1 px-3 sm:px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all font-bold font-fremen flex items-center justify-center gap-2 dune-glow-blue text-sm sm:text-base"
                   >
                     <BookOpen size={16} className="sm:w-[18px] sm:h-[18px]" />
-                    <span className="hidden sm:inline">Start Practice</span>
-                    <span className="sm:hidden">Practice</span>
+                    <span className="hidden sm:inline">Begin Training</span>
+                    <span className="sm:hidden">Train</span>
                   </button>
                 </div>
               </div>
@@ -430,7 +430,7 @@ export default function App() {
             <div className="bg-white border-2 border-orange-200 rounded-lg shadow-lg p-12 text-center">
               <BookOpen size={48} className="mx-auto text-orange-500 mb-4" />
               <p className="text-gray-700 text-lg font-fremen">
-                No templates yet. Click "New Template" to begin.
+                Your Mentat archives are empty. Begin your training with a new template.
               </p>
             </div>
           )}
@@ -462,10 +462,10 @@ export default function App() {
           >
             <ArrowLeft size={18} className="sm:w-5 sm:h-5" />
             <span className="sm:hidden">Back</span>
-            <span className="hidden sm:inline">Back to Library</span>
+            <span className="hidden sm:inline">Back to Archives</span>
           </button>
           <h1 className="text-lg sm:text-2xl md:text-3xl font-bold font-dune text-orange-600 flex-1 text-center dune-glow tracking-wide">
-            {currentText?.title || 'Practice Mode'}
+            {currentText?.title || 'Mentat Training'}
           </h1>
           <div className="hidden sm:block sm:w-32 md:w-48"></div> {/* Spacer for centering on desktop */}
         </div>
@@ -475,7 +475,7 @@ export default function App() {
           <div className="mb-4 sm:mb-6 bg-white border-2 border-orange-300 rounded-lg shadow-2xl p-3 sm:p-6">
             <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-3 sm:gap-0">
               <div className="flex-1 text-center sm:text-left">
-                <h2 className="text-xs sm:text-sm font-bold font-fremen text-gray-700 mb-1 tracking-wider">TIMER</h2>
+                <h2 className="text-xs sm:text-sm font-bold font-fremen text-gray-700 mb-1 tracking-wider">COMPUTATION TIMER</h2>
                 <p className="text-xs text-gray-600">
                   {currentText.timeLimit >= 60
                     ? `${Math.floor(currentText.timeLimit / 60)} minute${Math.floor(currentText.timeLimit / 60) > 1 ? 's' : ''}`
@@ -540,7 +540,7 @@ export default function App() {
               {/* Mode Selector */}
               <div>
                 <label className="block text-xs sm:text-sm font-bold font-fremen text-gray-700 mb-2 tracking-wider">
-                  Practice Mode
+                  Training Mode
                 </label>
                 <div className="flex gap-2">
                   <button
@@ -745,7 +745,7 @@ export default function App() {
             {allWordsHidden && (
               <div className="mt-6 p-4 bg-gradient-to-r from-green-100 to-blue-100 border-2 border-green-400 rounded-lg">
                 <p className="text-green-700 font-bold font-dune text-center tracking-wider">
-                  🎉 Great job! All words are hidden. Reset to start over.
+                  ✓ Mentat processing complete! All data committed to memory. Reset to train again.
                 </p>
               </div>
             )}

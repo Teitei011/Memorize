@@ -1,40 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Background circle with sand gradient -->
   <defs>
     <linearGradient id="sandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#e9a02f;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#c97339;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#da925e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c97339;stop-opacity:1" />
     </linearGradient>
     <linearGradient id="spiceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#3b9dff;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1a7df5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1365d8;stop-opacity:1" />
     </linearGradient>
+    <radialGradient id="eyeGrad">
+      <stop offset="0%" style="stop-color:#5cb9ff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3b9dff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1365d8;stop-opacity:1" />
+    </radialGradient>
   </defs>
 
-  <!-- Background -->
-  <circle cx="50" cy="50" r="48" fill="url(#sandGrad)"/>
+  <!-- Outer circle - desert sand -->
+  <circle cx="50" cy="50" r="48" fill="url(#sandGrad)" stroke="#8a4727" stroke-width="2"/>
 
-  <!-- Stylized sandworm/spice symbol -->
-  <!-- Central spice crystal shape -->
-  <path d="M 50 20 L 60 35 L 55 50 L 60 65 L 50 80 L 40 65 L 45 50 L 40 35 Z"
-        fill="url(#spiceGrad)"
-        stroke="#ffffff"
-        stroke-width="2"/>
+  <!-- Mentat computational patterns - geometric brain -->
+  <path d="M 30 35 Q 35 25 50 25 Q 65 25 70 35" fill="none" stroke="#6d3920" stroke-width="2.5" opacity="0.6"/>
+  <path d="M 28 45 Q 33 38 50 38 Q 67 38 72 45" fill="none" stroke="#6d3920" stroke-width="2" opacity="0.6"/>
 
-  <!-- Inner glow effect -->
-  <ellipse cx="50" cy="50" rx="8" ry="20" fill="#ffffff" opacity="0.3"/>
+  <!-- Stylized all-seeing Mentat eye with spice blue -->
+  <ellipse cx="50" cy="55" rx="24" ry="16" fill="url(#eyeGrad)" stroke="#1365d8" stroke-width="2"/>
 
-  <!-- Memory symbol - stylized "M" in Fremen style -->
-  <path d="M 30 45 L 35 55 L 40 45 M 60 45 L 65 55 L 70 45"
-        stroke="#ffffff"
-        stroke-width="2.5"
-        fill="none"
-        stroke-linecap="round"/>
+  <!-- Pupil with computational grid -->
+  <ellipse cx="50" cy="55" rx="10" ry="10" fill="#0a0e17" stroke="#3b9dff" stroke-width="1.5"/>
+  <circle cx="50" cy="55" r="4" fill="#5cb9ff"/>
 
-  <!-- Decorative dots representing sand particles -->
-  <circle cx="25" cy="30" r="1.5" fill="#ffffff" opacity="0.6"/>
-  <circle cx="75" cy="30" r="1.5" fill="#ffffff" opacity="0.6"/>
-  <circle cx="25" cy="70" r="1.5" fill="#ffffff" opacity="0.6"/>
-  <circle cx="75" cy="70" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <!-- Geometric computation lines emanating from eye -->
+  <line x1="26" y1="55" x2="20" y2="55" stroke="#6d3920" stroke-width="1.5" opacity="0.7"/>
+  <line x1="74" y1="55" x2="80" y2="55" stroke="#6d3920" stroke-width="1.5" opacity="0.7"/>
+  <line x1="35" y1="45" x2="30" y2="38" stroke="#6d3920" stroke-width="1.5" opacity="0.7"/>
+  <line x1="65" y1="45" x2="70" y2="38" stroke="#6d3920" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Sapho-stained lips (Mentat trademark) -->
+  <path d="M 35 75 Q 50 82 65 75" fill="none" stroke="#8d361c" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 35 75 Q 50 78 65 75" fill="none" stroke="#d1601d" stroke-width="1.5" stroke-linecap="round"/>
 </svg>

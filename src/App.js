@@ -71,7 +71,7 @@ export default function App() {
         {
           id: 6,
           title: "TOEFL Writing - Task 2: Independent Writing",
-          content: "In today's world, [general statement about the topic]. While some people believe [opposing viewpoint], I strongly believe [your thesis statement] for several compelling reasons.\n\nFirst, [first main reason]. For example, [specific example with details]. This clearly shows that [explanation of how example supports your point]. Many [people/situations] demonstrate [relevance of your example].\n\nSecond, [second main reason]. A good example of this is [specific example]. This example illustrates that [how the example supports your argument]. Furthermore, [additional explanation].\n\nAdditionally, [third reason if you choose to include one]. [Example and explanation].\n\nIn conclusion, while [acknowledge opposing view briefly], I maintain that [restatement of your position]. [Final thought about future implications or broader context].",
+          content: "In my opinion, [state your position/opinion on the topic]. My personal belief is that when [situation/context], it leads to [positive/negative outcome]. For example, people who [specific group or situation] can [action/benefit] to help [purpose or result]. Additionally, [another group or situation] can [action/benefit] for [reason]. I understand [counterargument or opposing view], but I believe this perspective misses another critical point. Much of [evidence or example] is due to [underlying cause or factor]. [Related concept] is not possible in a world without [your position], which is why I believe it is crucial to [restate your opinion] for [final benefit or reasoning].",
           timeLimit: 1800 // 30 minutes in seconds
         }
       ];
